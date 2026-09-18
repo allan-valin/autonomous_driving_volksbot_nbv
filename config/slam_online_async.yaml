@@ -1,0 +1,13 @@
+/**:
+  ros__parameters:
+    mode: mapping
+    odom_frame: odom
+    map_frame: map
+    base_frame: base_footprint     # ← your base, not base_link — same trap as the EKF
+    scan_topic: /scan_filtered
+    use_scan_matching: true
+    minimum_travel_distance: 0.0   # how far to move before processing a new scan
+    minimum_travel_heading: 0.0
+    map_update_interval: 2.5
+    use_sim_time: false
+    log-level: debug

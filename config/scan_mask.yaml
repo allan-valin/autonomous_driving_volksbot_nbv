@@ -1,0 +1,24 @@
+# Angular mask for a 360 degree LiDAR, applied by the upstream
+# laser_filters package (node: scan_to_scan_filter_chain).
+#   in:  /scan          out: /scan_filtered
+#
+# Blanks the cone where a payload sits on the robot, so it is not reported as a
+# permanent obstacle touching the footprint, which makes Nav2 refuse to move.
+#
+# The bounds are in the LASER frame, so they depend on how the sensor is
+# mounted. With base_link->laser at yaw=pi, laser 0 rad points at the robot's
+# REAR, so the rear cone is -pi/4 .. +pi/4. Mounted the other way round, the
+# same physical cone is at +-pi instead and needs two filters, one per side of
+# the wrap. Check with RViz before trusting these numbers.
+#
+# InPlace means "NaN out what falls INSIDE these bounds". The non-InPlace
+# variant of this filter keeps what is inside instead, which is the opposite of
+# what is wanted here.
+scan_to_scan_filter_chain:
+  ros__parameters:
+    filter1:
+      name: payload_cone
+      type: laser_filters/LaserScanAngularBoundsFilterInPlace
+      params:
+        lower_angle: -0.7854   # -45 deg
+        upper_angle: 0.7854    #  45 deg

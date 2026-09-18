@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>volksbot_nbv_bringup</name>
+  <version>1.0.0</version>
+  <description>
+    Bringup, navigation and SLAM configuration that lets a Volksbot-class
+    differential-drive robot explore an unknown indoor space autonomously,
+    using slam_toolbox for the map, Nav2 for motion and an external frontier
+    exploration node for goal selection.
+  </description>
+  <maintainer email="noreply@users.noreply.github.com">allan-valin</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- Upstream packages whose nodes the launch files start. -->
+  <exec_depend>imu_filter_madgwick</exec_depend>
+  <exec_depend>laser_filters</exec_depend>
+  <exec_depend>nav2_bringup</exec_depend>
+  <exec_depend>rclcpp_components</exec_depend>
+  <exec_depend>robot_localization</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>slam_toolbox</exec_depend>
+  <exec_depend>teleop_twist_joy</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
+  <exec_depend>xacro</exec_depend>
+
+  <!-- Hardware-side IMU driver. Only needed on the robot. -->
+  <exec_depend>phidgets_spatial</exec_depend>
+
+  <!--
+    NOT declared here because they are not in rosdep and must be cloned and
+    built by hand (see docs/SETUP.md):
+      volksbot_driver          - base driver + URDF + joystick config
+      sllidar_ros2             - LiDAR driver
+      frontier_exploration_ros2 - frontier detection and goal dispatch
+  -->
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
